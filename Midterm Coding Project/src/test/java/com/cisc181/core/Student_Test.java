@@ -29,9 +29,9 @@ public class Student_Test {
 
 	@BeforeClass
 	public static void setup() throws PersonException{
-		Course CompSci = new Course("Intro to CompSci", 94, eMajor.COMPSI);
-		Course Chemistry = new Course("Chem I", 73, eMajor.CHEM);
-		Course Business = new Course("Business 101", 64, eMajor.BUSINESS);
+		Course CompSci = new Course("Intro to CompSci", 3, eMajor.COMPSI);
+		Course Chemistry = new Course("Chem I",3, eMajor.CHEM);
+		Course Business = new Course("Business 101", 3, eMajor.BUSINESS);
 		courseList.add(CompSci);
 		courseList.add(Chemistry);
 		courseList.add(Business);
@@ -84,52 +84,16 @@ public class Student_Test {
 		
 	}
 	
-	public long calcGPA(UUID studentID){
-		long GPA = 0;
-		for (Enrollment enrollment : enrollmentList){
-			if (enrollment.getStudentID() == studentID){
-				if(enrollment.getGrade() >= 90){
-					GPA = GPA + 4;
-				}
-				else if(enrollment.getGrade() >= 80){
-					GPA = GPA + 3;
-				}
-				else if(enrollment.getGrade() >= 70){
-					GPA = GPA + 2;
-				}
-				else if(enrollment.getGrade() >= 60){
-					GPA = GPA + 1;
-				}
-				else{
-					GPA = GPA + 0;
-				}
-			}
-		}
-		return GPA / sectionList.size();
-	}
-	
-	public double CourseAv(UUID sectionID){
-		double courseAv = 0;
-		for (Enrollment enrollment : enrollmentList){
-			if (enrollment.getSectionID() == sectionID){
-				courseAv = (courseAv + enrollment.getGrade());
-			}
-		}
-		return (((courseAv / 10) * 100) / 100);
-		
-	}
-
-	@Test
-	public void Studenttest() {
+	public void StudentEnrollment() {
 		for (Enrollment enrollment : enrollmentList){
 			if (enrollment.getStudentID() == studentList.get(0).getStudentID() | enrollment.getStudentID() == studentList.get(1).getStudentID()){
 				enrollment.setGrade(100);
 			}
 			else if(enrollment.getStudentID() == studentList.get(2).getStudentID() | enrollment.getStudentID() == studentList.get(3).getStudentID()){
-				enrollment.setGrade(90);	
+				enrollment.setGrade(80);	
 			}
 			else if (enrollment.getStudentID() == studentList.get(4).getStudentID() | enrollment.getStudentID() == studentList.get(5).getStudentID()){
-				enrollment.setGrade(80);
+				enrollment.setGrade(75);
 			}
 			else if (enrollment.getStudentID() == studentList.get(6).getStudentID() | enrollment.getStudentID() == studentList.get(7).getStudentID()){
 				enrollment.setGrade(70);
@@ -143,8 +107,9 @@ public class Student_Test {
 				}
 			}
 		}
-		// dont know how to test for gpa and course average
+		
 	}
+	
 	@Test
 	public void MajorTest(){
 		assertTrue(studentList.get(0).getMajor() == eMajor.COMPSI);
